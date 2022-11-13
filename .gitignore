@@ -1,0 +1,7 @@
+outputs
+**/__pycache__/**
+**/__pycache__/**
+**/env/**
+.idea
+.terraform*
+**.tfstate*
