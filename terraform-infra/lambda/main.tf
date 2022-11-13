@@ -30,6 +30,7 @@ resource "aws_lambda_function" "exec_filter" {
   publish          = true
 }
 
+# every new entry in the table will trigger the lambda
 resource "aws_lambda_event_source_mapping" "allow_dynamodb_table_to_trigger_lambda" {
   event_source_arn  = var.dymanodb_stream_arn
   function_name     = aws_lambda_function.exec_filter.arn
