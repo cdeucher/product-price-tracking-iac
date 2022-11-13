@@ -16,20 +16,3 @@ $ terraform init
 $ terraform plan -out plan.tfplan
 $ terraform apply plan.tfplan
 ```
-
-## Testing functions
-```bash
-$ pytest
-```
-
-### API Testing Example
-
-```bash
-curl -XPOST 'https://api-dev.<dns>/titles' \
--d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
--H 'Content-Type: application/json'
-
-curl -XPOST 'https://api-gateway.../v1/titles' \
--d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
--H 'Content-Type: application/json'
-```
