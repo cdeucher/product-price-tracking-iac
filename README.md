@@ -10,7 +10,10 @@ This repository contains the IaC and Functions for the [java-selenium-aws-api-ga
 
 3º) The DynamoDB stream will trigger the AWS Lambda function to filter the results.
 
-4º) (not finished) The user will receive an email with the results of the test.
+### To be done
+- The user will receive an email with the results of the test.
+- Enable CORs in the API Gateway.
+- Add authorization to the API Gateway with AWS Cognito.
 
 ### Testing the API
 
@@ -23,3 +26,6 @@ curl -XPOST 'https://api-gateway.../v1/titles' \
 -d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
 -H 'Content-Type: application/json'
 ```
+
+
+### based on [cognito-authorizer-using-terraform](https://hands-on.cloud/managing-amazon-api-gateway-using-terraform/#h-cognito-authorizer-using-terraform)
