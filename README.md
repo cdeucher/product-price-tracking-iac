@@ -8,8 +8,9 @@ This repository contains the IaC and Functions for the [java-selenium-aws-api-ga
 
 2º) The AWS API Gateway will invoke the AWS Lambda function and store the result in the DynamoDB table.
 
-3º) (not finished) The DynamoDB stream will trigger the AWS Lambda function to filter the results and send an email with the results.
+3º) The DynamoDB stream will trigger the AWS Lambda function to filter the results.
 
+4º) (not finished) The user will receive an email with the results of the test.
 
 ### Testing the API
 
