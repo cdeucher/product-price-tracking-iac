@@ -1,7 +1,8 @@
 data "archive_file" "code" {
   for_each    = toset(["titles","filter"])
   type        = "zip"
-  source_file = "../lambdas/${each.key}/${each.key}.py"
+  # source_file = "../lambdas/${each.key}/${each.key}.py"
+  source_dir = "../lambdas/${each.key}"
   output_path = "outputs/${each.key}.zip"
 }
 

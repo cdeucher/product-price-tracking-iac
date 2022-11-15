@@ -10,3 +10,7 @@ variable "dymanodb_stream_arn" {
     type = string
     description = "The ARN of the dynamodb stream resource"
 }
+variable "api_arn" {
+  type = string
+  description = "The ARN of the API resource"
+}

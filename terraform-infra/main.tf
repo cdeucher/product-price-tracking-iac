@@ -9,6 +9,7 @@ module "lambda" {
   tabe_name    = var.tabe_name
   dynamodb_arn = module.dynamodb.dymanodb_arn
   dymanodb_stream_arn = module.dynamodb.dymanodb_stream_arn
+  api_arn = module.apigateway.rest_api_arn
 }
 
 module "apigateway" {
@@ -20,4 +21,13 @@ module "apigateway" {
   region                        = var.region
   sub_domain                    = local.get_subdomain
   domain                        = var.domain
+  cognito_user_pool_arn         = module.cognito.cognito_user_pool_arn
+
+  depends_on = [module.cognito]
+}
+
+module "cognito" {
+    source = "./cognito"
+    cognito_user_pool_name = var.cognito_user_pool_name
+    cognito_user_pool_client_name = var.cognito_user_pool_client_name
 }

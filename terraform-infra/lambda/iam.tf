@@ -33,3 +33,14 @@ resource "aws_iam_role_policy_attachment" "dynamodb_access" {
   role       = aws_iam_role.role_for_lambda.name
   policy_arn = aws_iam_policy.dynamodb_access.arn
 }
+
+
+resource "aws_iam_policy" "api_gateway_access" {
+  name        = "api_gateway_access"
+  description = "IAM policy for api_gateway"
+
+  policy = templatefile("./lambda/policies/apigateway_policy.json",{
+    api_arn = var.api_arn
+  })
+}
+

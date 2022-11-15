@@ -22,3 +22,7 @@ variable "invoke_url" {
   type = string
   description = "The invoke url of the website"
 }
+variable "cognito_user_pool_arn" {
+  type = string
+  description = "The ARN of the Cognito user pool"
+}

@@ -6,11 +6,11 @@
 
 ## Deployment
 - customize the Terraform code to your needs in the `/environments/` directory:
-  ```HCL
+```HCL
   accountId = "accountId from AWS IAM, ex. (123498234)"
   domain    = "domain name of the hosted zone, ex. (example.com)"
-  ```
-  ```
+```
+
 ```bash
 $ terraform init
 $ terraform plan -out plan.tfplan

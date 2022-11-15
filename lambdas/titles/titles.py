@@ -2,6 +2,7 @@ import os
 import boto3
 import json
 import logging
+import jwt
 from datetime import datetime;
 
 logger = logging.getLogger()
@@ -16,12 +17,17 @@ def handle_addtitle(event, context):
     response_body = {'error': 'Unprocessable Entity'}
     response_code = 422
     body = event.get('body')
+    headers = event.get('headers')
+    logger.info("Headers: %s", headers)
+    logger.info("Authorization: %s", headers['Authorization'])
+
+    decodedToken = jwt.decode(headers['Authorization'], algorithms=["RS256"], options={"verify_signature": False})
 
     if validate_fields(json.loads(body)):
         list_titles = json.loads(body)
         for title in list_titles:
             save_title(title)
-        response_body = {'list': 'ok', 'count': list_titles.__len__()}
+        response_body = {'list': 'ok', 'count': list_titles.__len__(), 'username': decodedToken["cognito:username"]}
         response_code = 200
 
     response = {

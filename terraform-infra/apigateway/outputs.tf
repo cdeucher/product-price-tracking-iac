@@ -4,3 +4,7 @@ output "rest_api_url" {
 output "invoke_url" {
   value = "https://${aws_api_gateway_domain_name.domain_name.domain_name}"
 }
+
+output "rest_api_arn" {
+  value = aws_api_gateway_rest_api.api.arn
+}

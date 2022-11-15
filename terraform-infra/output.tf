@@ -9,3 +9,11 @@ output "Endpoint" {
 output "rest_api_url" {
   value = module.apigateway.rest_api_url
 }
+
+output "cognito_client_id" {
+  value = module.cognito.user_pool_client_id
+}
+
+output "cognito_pool_id" {
+  value = module.cognito.cognito_user_pool_id
+}
