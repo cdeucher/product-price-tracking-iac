@@ -1,3 +1,21 @@
+### About this repository:
+The objective of this project is to create an application where you can subscribe with an email,
+link to a AWS product page and price target. 
+If the price of the product drops below the price target, you will receive an email notification with the new price.
+
+To make this possible, we will use the following AWS services:
+- AWS API Gateway
+- AWS Lambda
+- AWS DynamoDB
+- AWS Route53
+- AWS SNS
+- AWS CloudWatch
+- AWS S3
+- AWS Step Functions
+- AWS IAM
+- AWS Certificate Manager
+- AWS Cognito
+
 ### Serverless architecture for AWS Lambda and AWS API Gateway
 
 This repository contains the IaC and Functions for the [java-selenium-aws-api-gateway-rest](https://github.com/cdeucher/java-selenium-aws-api-gateway-rest) project.
@@ -13,9 +31,12 @@ This repository contains the IaC and Functions for the [java-selenium-aws-api-ga
 4º) Cognito will authenticate the request before triggering the AWS Lambda function.
 
 ### To be done
-- The user will receive an email with the results of the test.
+- User create account with Google to authenticate with Cognito.
+- User will receive an email with the results of the test.
 - Enable CORs in the API Gateway.
 - Lambda function should use layers to reduce the size of the deployment package.
+- Cron to run the Lambda function every 24 hours and compare the results with the DynamoDB table.
+- Page to subscribe with email, URL and price target.
 
 
 ## Deployment

@@ -3,8 +3,10 @@ import pytest
 import simplejson as json
 
 def test_handle_addtitle():
+    # python -c 'import jwt; print("%s",jwt.encode({"cognito:username": "payload"}, "secret", algorithm="HS256"))'
     event = {
-        'body': '[{"text": "test", "price": "test", "symbol": "test", "url": "test", "type": "test"}]'
+        'body': '[{"text": "test", "price": "test", "symbol": "test", "url": "test", "type": "test"}]',
+        'headers': {'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2duaXRvOnVzZXJuYW1lIjoicGF5bG9hZCJ9.A5GnRt0s-ielX_WdF7HJMaEVUsAjN3LGQzgZnh-nMBM'}
     }
     context = None
     response = titles.handle_addtitle(event, context)

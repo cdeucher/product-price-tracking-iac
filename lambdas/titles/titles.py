@@ -20,15 +20,16 @@ def handle_addtitle(event, context):
     headers = event.get('headers')
     logger.info("Headers: %s", headers)
     logger.info("Authorization: %s", headers['Authorization'])
-
-    decodedToken = jwt.decode(headers['Authorization'], algorithms=["RS256"], options={"verify_signature": False})
-
-    if validate_fields(json.loads(body)):
-        list_titles = json.loads(body)
-        for title in list_titles:
-            save_title(title)
-        response_body = {'list': 'ok', 'count': list_titles.__len__(), 'username': decodedToken["cognito:username"]}
-        response_code = 200
+    try:
+        decodedToken = jwt.decode(headers['Authorization'], algorithms=["RS256"], options={"verify_signature": False})
+        if validate_fields(json.loads(body)):
+            list_titles = json.loads(body)
+            for title in list_titles:
+                save_title(title)
+            response_body = {'list': 'ok', 'count': list_titles.__len__(), 'username': decodedToken["cognito:username"]}
+            response_code = 200
+    except Exception as e:
+        logger.error("Error: %s", e)
 
     response = {
         'statusCode': response_code,

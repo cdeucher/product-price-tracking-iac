@@ -1,7 +1,7 @@
 tabe_name = "titles"
 region    = "us-east-1"
-accountId = "<aws accountid>"
-domain    = "<domain>"
+accountId = "260578539897"
+domain    = "cabd.link"
 dynamodb_attributes = [
     { name = "text", type = "S" } 
    ,{ name = "date", type = "S" }
