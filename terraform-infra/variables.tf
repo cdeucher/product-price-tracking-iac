@@ -32,3 +32,8 @@ variable "cognito_user_pool_client_name" {
   description = "The name of the user pool client"
   default     = "login_pool"
 }
+
+variable "tags" {
+  type = map(string)
+  description = "Tags to apply to all resources"
+}

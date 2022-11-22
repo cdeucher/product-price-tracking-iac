@@ -1,15 +1,15 @@
 module "dynamodb" {
-  source = "./dynamodb"
-  table_name = var.tabe_name
-  attributes = var.dynamodb_attributes
+  source      = "./dynamodb"
+  table_name  = var.tabe_name
+  attributes  = var.dynamodb_attributes
 }
 
 module "lambda" {
-  source = "./lambda"
-  tabe_name    = var.tabe_name
-  dynamodb_arn = module.dynamodb.dymanodb_arn
+  source              = "./lambda"
+  tabe_name           = var.tabe_name
+  dynamodb_arn        = module.dynamodb.dymanodb_arn
   dymanodb_stream_arn = module.dynamodb.dymanodb_stream_arn
-  api_arn = module.apigateway.rest_api_arn
+  api_arn             = module.apigateway.rest_api_arn
 }
 
 module "apigateway" {
@@ -28,6 +28,14 @@ module "apigateway" {
 
 module "cognito" {
     source = "./cognito"
-    cognito_user_pool_name = var.cognito_user_pool_name
+    cognito_user_pool_name        = var.cognito_user_pool_name
     cognito_user_pool_client_name = var.cognito_user_pool_client_name
+}
+
+module "frontend" {
+  source     = "./frontend"
+  env_name   = var.env_name
+  tags       = var.tags
+  aws_region = var.region
+  src_path   = "../src/frontend"
 }
