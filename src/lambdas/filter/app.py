@@ -7,7 +7,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def exec_filter(event, context):
+def handle(event, context):
     logger.info("exec_filter %s", event)
     response_body = {'error': 'Unprocessable Entity'}
     response_code = 422

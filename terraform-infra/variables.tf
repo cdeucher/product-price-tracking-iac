@@ -1,15 +1,34 @@
-variable "env_name" {
+variable "region" {
+  description = "AWS region"
+  type        = string
+}
+variable "environment" {
   default = "dev"
+  type = string
+  description = "Environment name"
+}
+variable "project" {
+  default = "myapp"
+  type = string
+  description = "Project name"
+}
+variable "tags" {
+  type = map(string)
+  description = "Tags to apply to all resources"
 }
 variable "domain" {
   description = "Domain url of the website"
 }
+
+# Lambda Title
+variable "lambda_env" {
+    description = "Lambda environment"
+    type = list(map(string))
+}
+
+# DYNAMODB
 variable "tabe_name" {
   description = "DynamoDB table titles will be stored in"
-  type        = string
-}
-variable "region" {
-  description = "AWS region"
   type        = string
 }
 variable "accountId" {
@@ -31,9 +50,4 @@ variable "cognito_user_pool_client_name" {
   type        = string
   description = "The name of the user pool client"
   default     = "login_pool"
-}
-
-variable "tags" {
-  type = map(string)
-  description = "Tags to apply to all resources"
 }

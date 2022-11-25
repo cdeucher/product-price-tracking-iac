@@ -5,3 +5,4 @@ outputs
 .idea
 .terraform*
 **.tfstate*
+**/*.zip

@@ -15,7 +15,7 @@
      "dynamodb:DescribeStream",
      "dynamodb:ListStreams"
     ],
-    "Resource": ["${dynamodb_arn}","${dymanodb_stream_arn}"]
+    "Resource": ${jsonencode([for key in arns : "${key}"])}
    }
   ]
 }

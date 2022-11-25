@@ -4,26 +4,21 @@ module "dynamodb" {
   attributes  = var.dynamodb_attributes
 }
 
-module "lambda" {
+module "lambda_title" {
   source              = "./lambda"
-  tabe_name           = var.tabe_name
-  dynamodb_arn        = module.dynamodb.dymanodb_arn
-  dymanodb_stream_arn = module.dynamodb.dymanodb_stream_arn
-  api_arn             = module.apigateway.rest_api_arn
+  src_path            = "../src/lambdas/titles"
+  function_name       = "titles"
+  project             = local.get_project
+  lambda_env          = var.lambda_env
+  dynamodb_arn        = [module.dynamodb.dymanodb_arn]
 }
 
-module "apigateway" {
-  source = "./apigateway"
-
-  invoke_url                    = module.lambda.lambda_add_title_invokearn
-  add_title_function_name       = module.lambda.add_title_function_name
-  account_id                    = var.accountId
-  region                        = var.region
-  sub_domain                    = local.get_subdomain
-  domain                        = var.domain
-  cognito_user_pool_arn         = module.cognito.cognito_user_pool_arn
-
-  depends_on = [module.cognito]
+module "lambda_filter" {
+  source              = "./lambda"
+  src_path            = "../src/lambdas/filter"
+  function_name       = "filter"
+  project             = local.get_project
+  dymanodb_stream_arn = [module.dynamodb.dymanodb_stream_arn]
 }
 
 module "cognito" {
@@ -32,9 +27,26 @@ module "cognito" {
     cognito_user_pool_client_name = var.cognito_user_pool_client_name
 }
 
+module "apigateway" {
+  source = "./apigateway"
+
+  project                       = local.get_project
+  endpoint                      = "api2"
+  stage                         = "dev"
+  invoke_url                    = module.lambda_title.invoke_arn
+  add_title_function_name       = module.lambda_title.function_name
+  account_id                    = var.accountId
+  region                        = var.region
+  sub_domain                    = local.get_subdomain
+  domain                        = var.domain
+  tags                          = var.tags
+  #cognito_user_pool_arn         = module.cognito.cognito_user_pool_arn
+  #depends_on                    = [module.cognito]
+}
+
 module "frontend" {
   source     = "./frontend"
-  env_name   = var.env_name
+  env_name   = var.environment
   tags       = var.tags
   aws_region = var.region
   src_path   = "../src/frontend"

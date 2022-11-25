@@ -1,16 +1,27 @@
-variable "tabe_name" {
-  type = string
-  description = "The name of the table to create"
-}
 variable "dynamodb_arn" {
-  type = string
-  description = "The ARN of the dynamodb resource"
+    type        = list(string)
+    description = "The ARN of the dynamodb resource"
+    default     = []
 }
 variable "dymanodb_stream_arn" {
-    type = string
+    type        = list(string)
     description = "The ARN of the dynamodb stream resource"
+    default     = []
 }
-variable "api_arn" {
-  type = string
-  description = "The ARN of the API resource"
+variable "src_path" {
+    description = "Path to the source code"
+    type        = string
+}
+variable "function_name" {
+    type = string
+    description = "The name of the function"
+}
+variable "lambda_env" {
+    description = "Lambda environment"
+    type    = list(map(string))
+    default = []
+}
+variable "project" {
+    type = string
+    description = "The name of the project"
 }

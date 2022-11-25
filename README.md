@@ -52,7 +52,19 @@ $ terraform plan -out plan.tfplan
 $ terraform apply plan.tfplan
 ```
 
-### Testing the API
+### Testing the API without Cognito
+
+```bash
+curl -XPOST 'https://<custom dns>/<endpoint>' \
+-d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]'
+
+curl -XPOST 'https://d1sx0y9lgg.execute-api.us-east-1.amazonaws.com/dev/api2' \
+-d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
+-H 'Content-Type: application/json' -H "Authorization: 123"
+```
+
+
+### Testing the API with Cognito
 
 ### Create cognito user
 ```bash

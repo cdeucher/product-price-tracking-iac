@@ -7,7 +7,7 @@
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": ["${log_group_arn}:*", "${log_filter_arn}:*"],
+      "Resource": ["${log_group_arn}:*"],
       "Effect": "Allow"
     }
   ]

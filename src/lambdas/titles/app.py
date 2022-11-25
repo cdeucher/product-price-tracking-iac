@@ -12,7 +12,7 @@ dynamodb_client = boto3.client('dynamodb')
 
 TITLES_TABLE = os.environ.get('TITLES_TABLE', 'titles')
 
-def handle_addtitle(event, context):
+def handle(event, context):
     logger.info("Request: %s", event)
     response_body = {'error': 'Unprocessable Entity'}
     response_code = 422
