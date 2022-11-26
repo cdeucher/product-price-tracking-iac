@@ -35,9 +35,10 @@ This repository contains the IaC and Functions for the [java-selenium-aws-api-ga
 - User will receive an email with the results of the test.
 - Enable CORs in the API Gateway.
 - Lambda function should use layers to reduce the size of the deployment package.
-- Cron to run the Lambda function every 24 hours and compare the results with the DynamoDB table.
 - Page to subscribe with email, URL and price target.
 
+## Pre-requisites
+- Domain registered in Route53
 
 ## Deployment
 - Customize the Terraform code to your needs in the `/environments/` directory:
@@ -45,11 +46,18 @@ This repository contains the IaC and Functions for the [java-selenium-aws-api-ga
   accountId = "accountId from AWS IAM, ex. (123498234)"
   domain    = "domain name of the hosted zone, ex. (example.com)"
 ```
+- Export the GCP credentials to the environment:
+  - Check out for more information: [how-to-add-google-social-sign](https://beabetterdev.com/2021/08/16/how-to-add-google-social-sign-on-to-your-amazon-cognito-user-pool)
+```bash
+export GCP_CLIENT_ID="xxxx.apps.googleusercontent.com"
+export GCP_CLIENT_SECRET="xxxx-O0uiHAWoT00cKlNrxxx"
+```
 
 ```bash
 $ terraform init
-$ terraform plan -out plan.tfplan
-$ terraform apply plan.tfplan
+$ terraform apply --var-file=environments/dev.tfvars \
+  -var="gcp_client_id=${GCP_CLIENT_ID}" \ 
+  -var="gcp_client_secret=${GCP_CLIENT_SECRET}"
 ```
 
 ### Testing the API without Cognito
@@ -69,14 +77,14 @@ curl -XPOST 'https://ou02gqjcek.execute-api.us-east-1.amazonaws.com/dev/api2' \
 ```bash
 ./create_user.sh "<put your client id here>" "<put your user pool id here>" "<put a username>" "<put a password>"
 
- # aws cognito-idp sign-up --client-id 4u3n9k0jqoa95klmc06p7it2s1 --username admin --password Admin@123
+ # aws cognito-idp sign-up --client-id xuxnxk0jqoaxxklmxxxp7itxsx --username admin --password Admin@123
 ```
 
 ### Get cognito token
 ```bash
 ./get_token.sh "<put your client id here>" "<put a username>" "<put a password>"
 
-# TOKEN=$(./get_token.sh 4u3n9k0jqoa95klmc06p7it2s1 admin Admin@123)
+# TOKEN=$(./get_token.sh xuxnxk0jqoaxxklmxxxp7itxsx admin ExamplePass@123)
 ```
 
 ### Test the API
@@ -95,4 +103,3 @@ curl -XPOST 'https://api-gateway.../v1/titles' \
 -d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
 -H 'Content-Type: application/json' -H "Authorization:${TOKEN}"
 ```
-

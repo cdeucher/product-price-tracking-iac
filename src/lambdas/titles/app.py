@@ -32,6 +32,12 @@ def handle(event, context):
         logger.error("Error: %s", e)
 
     response = {
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+        },
         'statusCode': response_code,
         'body': json.dumps(response_body)
     }

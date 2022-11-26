@@ -16,6 +16,10 @@ tags = {
 project = "app"
 environment = "dev"
 
+# Cognito
+# gcp_client_id = "xxx.apps.googleusercontent.com"
+# gcp_client_secret = "xxx"
+
 # Lambda
 lambda_env = [{ TITLES_TABLE = "titles" }]
 

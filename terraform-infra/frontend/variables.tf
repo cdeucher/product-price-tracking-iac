@@ -21,14 +21,17 @@ variable "tags" {
     description = "Tags para serem aplicadas em todos os recursos"
 }
 
-locals {
-  tag_environment_name = {
-    "dev" = "development"
-    "stg" = "staging"
-    "prd" = "production"
-  }
-}
 variable "src_path" {
   description = "Path to the source code"
   type        = string
+}
+
+variable "subdomain" {
+    type        = string
+    description = "URL to the Apliaction"
+}
+
+variable "domain_name" {
+    type        = string
+    description = "Domain name"
 }

@@ -9,3 +9,11 @@ output "cognito_user_pool_arn" {
 output "user_pool_client_id" {
   value = aws_cognito_user_pool_client.user_pool_client.id
 }
+
+output "aws_cognito_identity_pool_id" {
+  value = aws_cognito_identity_pool.main.id
+}
+
+output "aws_cognito_login_domain" {
+  value = aws_cognito_user_pool_domain.main.domain
+}

@@ -27,6 +27,8 @@ exports.handler = (event, context, callback) => {
 			'https://*.hotjar.com',
 			'http://*.hotjar.io',
 			'https://*.hotjar.io',
+			'*.google.com',
+			'*.amazonaws.com',
 		],
 		'connect-src':[
 			"'self'",
@@ -37,7 +39,8 @@ exports.handler = (event, context, callback) => {
 			'https://analytics.conpass.io/v2/',
 			'https://stats.g.doubleclick.net',
 			'https://*.youtube.com',
-			'https://cdn.cookielaw.org'
+			'https://cdn.cookielaw.org',
+			'https://cognito-identity.us-east-1.amazonaws.com',
 		],
 		'style-src': [
 			"'self'",
@@ -45,7 +48,8 @@ exports.handler = (event, context, callback) => {
 			'*.cabd.link',
 			'fonts.googleapis.com',
 			'*.cloudfront.net',
-
+			'*.google.com',
+			'*.amazonaws.com',
 		],
 		'media-src': [
 			"'self'",
@@ -63,6 +67,8 @@ exports.handler = (event, context, callback) => {
 			'storage.googleapis.com',
 			'*.cabd.link',
 			'*.cloudfront.net',
+			'*.google.com',
+			'*.amazonaws.com',
 		],
 		'script-src-elem': [
 			"'self'",
@@ -73,6 +79,8 @@ exports.handler = (event, context, callback) => {
 			'storage.googleapis.com',
 			'*.cabd.link',
 			'*.cloudfront.net',
+			'*.google.com',
+			'*.amazonaws.com',
 		],
 		'prefetch-src': [
 			"'self'",
@@ -89,6 +97,8 @@ exports.handler = (event, context, callback) => {
 			'*.cabd.link',
 			'https://*.youtube.com',
 			'*.cloudfront.net',
+			'*.google.com',
+			'*.amazonaws.com',
 		],
 		'form-action': [
 			"'self'",

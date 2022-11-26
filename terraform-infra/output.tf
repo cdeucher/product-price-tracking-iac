@@ -18,6 +18,14 @@ output "cognito_pool_id" {
   value = module.cognito.cognito_user_pool_id
 }
 
+output "cognito_identity_pool_id" {
+  value = module.cognito.aws_cognito_identity_pool_id
+}
+
 output "frontend_domain" {
   value = module.frontend.frontend_domain
+}
+
+output "aws_cognito_login_domain" {
+  value = module.cognito.aws_cognito_login_domain
 }

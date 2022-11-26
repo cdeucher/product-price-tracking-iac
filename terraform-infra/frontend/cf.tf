@@ -3,7 +3,7 @@ resource "aws_cloudfront_origin_access_identity" "devops_app_access_identity" {
 }
 
 data "aws_acm_certificate" "acm_certificate" {
-  domain      = local.domain_name
+  domain      = var.domain_name
   statuses    = ["ISSUED"]
   most_recent = true
 }
@@ -23,13 +23,7 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
-  aliases = [
-    lookup({
-      dev = "dash.${local.domain_name}",
-      dev2 = "dash-dev.${local.domain_name}",
-      stg = "dash-staging.${local.domain_name}"
-    }, var.env_name, "dash-portal.${local.domain_name}")
-  ]
+  aliases = [ local.get_domain ]
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
