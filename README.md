@@ -58,7 +58,7 @@ $ terraform apply plan.tfplan
 curl -XPOST 'https://<custom dns>/<endpoint>' \
 -d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]'
 
-curl -XPOST 'https://d1sx0y9lgg.execute-api.us-east-1.amazonaws.com/dev/api2' \
+curl -XPOST 'https://ou02gqjcek.execute-api.us-east-1.amazonaws.com/dev/api2' \
 -d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
 -H 'Content-Type: application/json' -H "Authorization: 123"
 ```
@@ -91,4 +91,3 @@ curl -XPOST 'https://api-gateway.../v1/titles' \
 -H 'Content-Type: application/json' -H "Authorization:${TOKEN}"
 ```
 
-### based on [cognito-authorizer-using-terraform](https://hands-on.cloud/managing-amazon-api-gateway-using-terraform/#h-cognito-authorizer-using-terraform)

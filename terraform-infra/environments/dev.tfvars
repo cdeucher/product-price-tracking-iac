@@ -1,3 +1,6 @@
+# Settings
+cognito_enabled = false
+
 # General
 region    = "us-east-1"
 accountId = "260578539897"

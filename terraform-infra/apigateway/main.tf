@@ -15,29 +15,19 @@ resource "aws_api_gateway_resource" "titles" {
   path_part   = var.endpoint
 }
 
-resource "aws_api_gateway_authorizer" "api_authorizer" {
-    count         = var.cognito_user_pool_arn != "" ? 1 : 0
-    name          = "${var.project}-cognito-authorizer"
-    type          = "COGNITO_USER_POOLS"
-    rest_api_id   = aws_api_gateway_rest_api.api.id
-    provider_arns = [var.cognito_user_pool_arn]
-}
+module "authorizer" {
+  source = "./auth"
 
-resource "aws_api_gateway_method" "add_title" {
-    rest_api_id   = aws_api_gateway_rest_api.api.id
-    resource_id   = aws_api_gateway_resource.titles.id
-    http_method   = "POST" # "POST/GET/PUT/DELETE/OPTIONS/PATCH"
-    authorization = var.cognito_user_pool_arn != "" ? "COGNITO_USER_POOLS" : "NONE"
-    authorizer_id = var.cognito_user_pool_arn != "" ? aws_api_gateway_authorizer.api_authorizer[0].id : ""
-    request_parameters = {
-      "method.request.path.proxy" = true
-    }
+  cognito_user_pool_arn = var.cognito_user_pool_arn
+  project               = var.project
+  resource_id           = aws_api_gateway_resource.titles.id
+  rest_api_id           = aws_api_gateway_rest_api.api.id
 }
 
 resource "aws_api_gateway_integration" "add_title" {
   rest_api_id             = aws_api_gateway_rest_api.api.id
   resource_id             = aws_api_gateway_resource.titles.id
-  http_method             = aws_api_gateway_method.add_title.http_method
+  http_method             = module.authorizer.http_method
   type                    = "AWS_PROXY"
   uri                     = var.invoke_url
   integration_http_method = "POST"
@@ -55,7 +45,7 @@ resource "aws_lambda_permission" "apigw_lambda" {
 resource "aws_api_gateway_deployment" "main" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   depends_on = [
-    aws_api_gateway_method.add_title,
+    module.authorizer,
     aws_api_gateway_integration.add_title,
   ]
 }

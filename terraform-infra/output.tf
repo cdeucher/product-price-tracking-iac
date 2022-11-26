@@ -11,9 +11,9 @@ output "rest_api_url" {
 }
 
 output "cognito_client_id" {
-  value = module.cognito.user_pool_client_id
+  value = length(module.cognito) > 0 ? module.cognito[0].user_pool_client_id : ""
 }
 
 output "cognito_pool_id" {
-  value = module.cognito.cognito_user_pool_id
+  value = length(module.cognito) > 0 ? module.cognito[0].cognito_user_pool_id : ""
 }

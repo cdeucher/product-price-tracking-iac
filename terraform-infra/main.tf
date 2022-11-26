@@ -22,6 +22,7 @@ module "lambda_filter" {
 }
 
 module "cognito" {
+    count = var.cognito_enabled ? 1 : 0
     source = "./cognito"
     cognito_user_pool_name        = var.cognito_user_pool_name
     cognito_user_pool_client_name = var.cognito_user_pool_client_name
@@ -40,8 +41,7 @@ module "apigateway" {
   sub_domain                    = local.get_subdomain
   domain                        = var.domain
   tags                          = var.tags
-  #cognito_user_pool_arn         = module.cognito.cognito_user_pool_arn
-  #depends_on                    = [module.cognito]
+  cognito_user_pool_arn         = var.cognito_enabled ? module.cognito[0].cognito_user_pool_arn : ""
 }
 
 module "frontend" {

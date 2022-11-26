@@ -1,3 +1,10 @@
+# Settings
+variable "cognito_enabled" {
+  type = bool
+  default = true
+  description = "Activate Cognito"
+}
+
 variable "region" {
   description = "AWS region"
   type        = string
