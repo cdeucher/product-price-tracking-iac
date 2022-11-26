@@ -1,3 +1,6 @@
+# Settings
+authorizer_cognito_enabled = true
+
 # General
 region    = "us-east-1"
 accountId = "260578539897"

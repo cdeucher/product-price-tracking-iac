@@ -58,9 +58,8 @@ $ terraform apply plan.tfplan
 curl -XPOST 'https://<custom dns>/<endpoint>' \
 -d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]'
 
-curl -XPOST 'https://d1sx0y9lgg.execute-api.us-east-1.amazonaws.com/dev/api2' \
--d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]' \
--H 'Content-Type: application/json' -H "Authorization: 123"
+curl -XPOST 'https://ou02gqjcek.execute-api.us-east-1.amazonaws.com/dev/api2' \
+-d  '[{"text": "mushoku","price":"20.01","symbol":"R$","url":"localhost","type":"kindle"}]'
 ```
 
 
@@ -69,16 +68,22 @@ curl -XPOST 'https://d1sx0y9lgg.execute-api.us-east-1.amazonaws.com/dev/api2' \
 ### Create cognito user
 ```bash
 ./create_user.sh "<put your client id here>" "<put your user pool id here>" "<put a username>" "<put a password>"
+
+ # aws cognito-idp sign-up --client-id 4u3n9k0jqoa95klmc06p7it2s1 --username admin --password Admin@123
 ```
 
 ### Get cognito token
 ```bash
 ./get_token.sh "<put your client id here>" "<put a username>" "<put a password>"
+
+# TOKEN=$(./get_token.sh 4u3n9k0jqoa95klmc06p7it2s1 admin Admin@123)
 ```
 
 ### Test the API
 ```bash
 ./api_test.sh "<api-url>" "<token>"
+
+# ./api_test.sh "https://api-dev.cabd.link/api2" "${TOKEN}"
 ```
 
 ```bash
@@ -91,4 +96,3 @@ curl -XPOST 'https://api-gateway.../v1/titles' \
 -H 'Content-Type: application/json' -H "Authorization:${TOKEN}"
 ```
 
-### based on [cognito-authorizer-using-terraform](https://hands-on.cloud/managing-amazon-api-gateway-using-terraform/#h-cognito-authorizer-using-terraform)

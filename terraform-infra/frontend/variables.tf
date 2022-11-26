@@ -7,6 +7,11 @@ variable "aws_region_availability_zone" {
   default = "us-east-1a"
 }
 
+variable "project" {
+  type = string
+  description = "Project name"
+}
+
 variable "env_name" {
   description = "Nome que define o ambiente (dev, stg, prd)"
 }

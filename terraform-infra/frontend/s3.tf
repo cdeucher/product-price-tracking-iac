@@ -1,7 +1,14 @@
-resource "aws_s3_bucket" "devops_app_bucket" {
-  bucket = "devops-app-bucket-${var.env_name}"
+resource "random_string" "random" {
+  length           = 16
+  special          = false
+  upper            = false
+  override_special = "/@£$"
+}
 
-  tags = merge({ Name  = "devops-app-${var.env_name}" }, var.tags)
+resource "aws_s3_bucket" "devops_app_bucket" {
+  bucket = "${var.project}-bucket-${random_string.random.result}"
+
+  tags = merge({ Name  = "${var.project}-bucket" }, var.tags)
 }
 
 resource "aws_s3_bucket_acl" "acl" {
@@ -63,4 +70,22 @@ data "aws_iam_policy_document" "devops_app_policy_document" {
 resource "aws_s3_bucket_policy" "devops_app_bucket_policy" {
   bucket = aws_s3_bucket.devops_app_bucket.id
   policy = data.aws_iam_policy_document.devops_app_policy_document.json
+}
+
+resource "aws_s3_bucket_website_configuration" "bucket_website" {
+  bucket = aws_s3_bucket.devops_app_bucket.id
+  index_document {
+    suffix = "index.html"
+  }
+  error_document {
+    key = "error.html"
+  }
+}
+
+resource "aws_s3_bucket_ownership_controls" "website_controls" {
+  bucket = aws_s3_bucket.devops_app_bucket.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
 }

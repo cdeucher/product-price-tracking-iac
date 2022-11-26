@@ -1,4 +1,4 @@
-output "subdomain" {
+output "api" {
   description = "main_url da api"
   value       = local.get_subdomain
 }
@@ -16,4 +16,8 @@ output "cognito_client_id" {
 
 output "cognito_pool_id" {
   value = module.cognito.cognito_user_pool_id
+}
+
+output "frontend_domain" {
+  value = module.frontend.frontend_domain
 }

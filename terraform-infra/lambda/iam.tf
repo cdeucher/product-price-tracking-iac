@@ -12,9 +12,16 @@ resource "aws_iam_policy" "policy" {
     })
 }
 
+#  TODO: fix permissions to allow only the lambda to write to the log group
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
     role       = aws_iam_role.role_for_lambda.name
     policy_arn = aws_iam_policy.policy.arn
+}
+
+#  TODO: remove this policy after testing remove invoke permissions
+resource "aws_iam_role_policy_attachment" "lambda_policy" {
+    role       = aws_iam_role.role_for_lambda.name
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 resource "aws_iam_policy" "dynamodb_access" {
@@ -32,4 +39,3 @@ resource "aws_iam_role_policy_attachment" "dynamodb_access" {
     role       = aws_iam_role.role_for_lambda.name
     policy_arn = aws_iam_policy.dynamodb_access[0].arn
 }
-

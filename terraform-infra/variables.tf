@@ -1,3 +1,10 @@
+# Settings
+variable "authorizer_cognito_enabled" {
+  type = bool
+  default = false
+  description = "Activate Cognito"
+}
+
 variable "region" {
   description = "AWS region"
   type        = string
