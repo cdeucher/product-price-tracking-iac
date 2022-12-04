@@ -1,10 +1,11 @@
 # Settings
 authorizer_cognito_enabled = true
+# service_account_ci_arn = "arn:aws:iam::xx:user/xx"
 
 # General
 region    = "us-east-1"
-accountId = "260578539897"
-domain    = "cabd.link"
+# accountId = "xx"
+# domain    = "xx"
 tags = {
     Name             = "app"
     Environment      = "dev"
@@ -16,9 +17,13 @@ tags = {
 project = "app"
 environment = "dev"
 
+# Api Gateway
+endpoint = "api2"
+stage = "dev"
+
 # Cognito
-# gcp_client_id = "xxx.apps.googleusercontent.com"
-# gcp_client_secret = "xxx"
+# gcp_client_id = ""
+# gcp_client_secret = ""
 
 # Lambda
 lambda_env = [{ TITLES_TABLE = "titles" }]

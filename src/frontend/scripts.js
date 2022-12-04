@@ -9,7 +9,13 @@ function login() {
     if( token != null){
         console.log('logged in!');
     }else {
-        window.location.href = "https://login-6il81smzduwx5dhj.auth.us-east-1.amazoncognito.com/login?client_id=47hr08os7gvoa6ig3i82iqqd9e&response_type=token&scope=email+openid+phone&redirect_uri=https://dash.cabd.link";
+        client_id="2cct9b33ba202phg61fspdppho";
+        cognito_domain="login-ze0zatn0ipkhxh56";
+        region="us-east-1";
+        redirect="https://dash.cabd.link";
+        aws_cognito_login_domain="https://"+cognito_domain+".auth."+region+".amazoncognito.com";
+        cognitoUrl_fromUserPoolUI=aws_cognito_login_domain+"/login?client_id="+client_id+"&response_type=token&scope=email+openid+phone&redirect_uri="+redirect;
+        window.location.href = cognitoUrl_fromUserPoolUI;
     }
 }
 function get_token() {

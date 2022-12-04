@@ -1,18 +1,20 @@
 data "archive_file" "code" {
     type        = "zip"
     source_dir  = "${var.src_path}/src"
-    output_path = "outputs/${var.src_path}-src.zip"
+    output_path = "outputs/${var.function_name}-src.zip"
 }
 data "archive_file" "layer" {
     type        = "zip"
     source_dir  = "${var.src_path}/layer"
-    output_path = "outputs/${var.src_path}-layer.zip"
+    output_path = "outputs/${var.function_name}-layer.zip"
 }
 resource "aws_lambda_layer_version" "this" {
-    filename    = "outputs/${var.src_path}-layer.zip"
+    filename    = "outputs/${var.function_name}-layer.zip"
     layer_name  = "${var.project}-${var.function_name}-layer"
     description = "${var.project}-${var.function_name}-layer"
+    source_code_hash = data.archive_file.layer.output_base64sha256
     compatible_runtimes = ["python3.8"]
+    compatible_architectures = ["x86_64"]
 }
 resource "aws_lambda_function" "lambda" {
     function_name    = "${var.project}-${var.function_name}"
@@ -28,6 +30,11 @@ resource "aws_lambda_function" "lambda" {
         content {
             variables = environment.value
         }
+    }
+    lifecycle {
+        ignore_changes = [
+            source_code_hash
+        ]
     }
 }
 

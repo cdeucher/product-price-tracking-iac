@@ -1,19 +1,19 @@
-resource "aws_api_gateway_resource" "cors_resource" {
+/*resource "aws_api_gateway_resource" "cors_resource" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   parent_id   = aws_api_gateway_rest_api.api.root_resource_id
-  path_part   = "{cors+}"
-}
+  path_part   = var.endpoint
+}*/
 
 resource "aws_api_gateway_method" "cors_method" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
-  resource_id   = aws_api_gateway_resource.cors_resource.id
+  resource_id   = aws_api_gateway_resource.resource.id
   http_method   = "OPTIONS"
   authorization = "NONE"
 }
 
 resource "aws_api_gateway_integration" "cors_integration" {
   rest_api_id = aws_api_gateway_rest_api.api.id
-  resource_id = aws_api_gateway_resource.cors_resource.id
+  resource_id = aws_api_gateway_resource.resource.id
   http_method = aws_api_gateway_method.cors_method.http_method
   type = "MOCK"
   request_templates = {
@@ -26,7 +26,7 @@ resource "aws_api_gateway_integration" "cors_integration" {
 resource "aws_api_gateway_method_response" "cors_response" {
   depends_on = [aws_api_gateway_method.cors_method]
   rest_api_id = aws_api_gateway_rest_api.api.id
-  resource_id = aws_api_gateway_resource.cors_resource.id
+  resource_id = aws_api_gateway_resource.resource.id
   http_method = aws_api_gateway_method.cors_method.http_method
   status_code = 200
   response_parameters = {
@@ -42,12 +42,12 @@ resource "aws_api_gateway_method_response" "cors_response" {
 resource "aws_api_gateway_integration_response" "cors_integration_response" {
   depends_on = [aws_api_gateway_integration.cors_integration, aws_api_gateway_method_response.cors_response]
   rest_api_id = aws_api_gateway_rest_api.api.id
-  resource_id = aws_api_gateway_resource.cors_resource.id
+  resource_id = aws_api_gateway_resource.resource.id
   http_method = aws_api_gateway_method.cors_method.http_method
   status_code = 200
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin" = "'*'",
     "method.response.header.Access-Control-Allow-Headers" = "'*'",
-    "method.response.header.Access-Control-Allow-Methods" = "'GET, OPTIONS'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET, POST, OPTIONS'"
   }
 }

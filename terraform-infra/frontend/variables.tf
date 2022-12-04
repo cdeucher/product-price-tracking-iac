@@ -35,3 +35,8 @@ variable "domain_name" {
     type        = string
     description = "Domain name"
 }
+
+variable "service_account_ci_arn" {
+    type = string
+    description = "ARN of the service account used by CI"
+}

@@ -1,12 +1,5 @@
-resource "random_string" "random" {
-  length           = 16
-  special          = false
-  upper            = false
-  override_special = "/@£$"
-}
-
 resource "aws_s3_bucket" "devops_app_bucket" {
-  bucket = "${var.project}-bucket-${random_string.random.result}"
+  bucket = "${var.project}-bucket-ufkse1xd9uhfi6lv"
 
   tags = merge({ Name  = "${var.project}-bucket" }, var.tags)
 }
@@ -43,6 +36,12 @@ resource "aws_s3_object" "static_sync" {
   etag   = filemd5("${path.module}/${var.src_path}/${each.value}")
 
   content_type = "%{ if contains(["jpeg", ".jpg"], strrev(substr(strrev(each.value), 0, 4))) }image/jpeg%{ endif }%{ if contains(["png"], strrev(substr(strrev(each.value), 0, 3))) }image/png%{ endif }%{ if contains(["json"], strrev(substr(strrev(each.value), 0, 4))) }application/json%{ endif }%{ if contains(["apple-app-site-association"], strrev(substr(strrev(each.value), 0, 26))) }application/json%{ endif }%{ if contains(["html"], strrev(substr(strrev(each.value), 0, 4))) }text/html%{ endif }%{ if contains(["js"], strrev(substr(strrev(each.value), 0, 2))) }text/javascript%{ endif }%{ if contains(["css"], strrev(substr(strrev(each.value), 0, 3))) }text/css%{ endif }%{ if contains(["csv"], strrev(substr(strrev(each.value), 0, 3))) }text/csv%{ endif }"
+  lifecycle {
+    ignore_changes = [
+      content_type,
+      etag
+    ]
+  }
 }
 
 
@@ -63,6 +62,15 @@ data "aws_iam_policy_document" "devops_app_policy_document" {
     principals {
       type        = "AWS"
       identifiers = [aws_cloudfront_origin_access_identity.devops_app_access_identity.iam_arn]
+    }
+  }
+  statement {
+    actions   = ["s3:*Object"]
+    resources = ["${aws_s3_bucket.devops_app_bucket.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = [var.service_account_ci_arn]
     }
   }
 }

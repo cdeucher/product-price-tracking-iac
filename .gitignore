@@ -6,3 +6,4 @@ outputs
 .terraform*
 **.tfstate*
 **/*.zip
+**/*-prd.tfvars

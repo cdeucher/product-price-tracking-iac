@@ -110,4 +110,11 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
   }
 
   tags = merge({ Name  = "devops-app-${var.env_name}"}, var.tags)
+
+  lifecycle {
+    ignore_changes = [
+      ordered_cache_behavior,
+      default_cache_behavior
+    ]
+  }
 }

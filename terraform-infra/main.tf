@@ -36,8 +36,8 @@ module "apigateway" {
     source = "./apigateway"
 
     project                       = local.get_project
-    endpoint                      = "api2"
-    stage                         = "dev"
+    endpoint                      = var.endpoint
+    stage                         = var.stage
     invoke_url                    = module.lambda_title.invoke_arn
     add_title_function_name       = module.lambda_title.function_name
     account_id                    = var.accountId
@@ -58,6 +58,7 @@ module "apigateway" {
 
 module "frontend" {
     source     = "./frontend"
+    service_account_ci_arn = var.service_account_ci_arn
     env_name   = var.environment
     tags       = var.tags
     aws_region = var.region

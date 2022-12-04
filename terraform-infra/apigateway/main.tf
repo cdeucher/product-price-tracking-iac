@@ -9,7 +9,7 @@ resource "aws_api_gateway_account" "gateway_account" {
   cloudwatch_role_arn = aws_iam_role.role_for_apigateway.arn
 }
 
-resource "aws_api_gateway_resource" "titles" {
+resource "aws_api_gateway_resource" "resource" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   parent_id   = aws_api_gateway_rest_api.api.root_resource_id
   path_part   = var.endpoint
@@ -20,16 +20,16 @@ module "authorizer" {
 
   cognito_user_pool_arn = var.cognito_user_pool_arn
   project               = var.project
-  resource_id           = aws_api_gateway_resource.titles.id
+  resource_id           = aws_api_gateway_resource.resource.id
   rest_api_id           = aws_api_gateway_rest_api.api.id
   authorizer_cognito_enabled = var.authorizer_cognito_enabled
 
-  depends_on = [aws_api_gateway_resource.titles, aws_api_gateway_rest_api.api]
+  depends_on = [aws_api_gateway_rest_api.api]
 }
 
 resource "aws_api_gateway_integration" "add_title" {
   rest_api_id             = aws_api_gateway_rest_api.api.id
-  resource_id             = aws_api_gateway_resource.titles.id
+  resource_id             = aws_api_gateway_resource.resource.id
   http_method             = module.authorizer.http_method
   type                    = "AWS_PROXY"
   uri                     = var.invoke_url

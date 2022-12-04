@@ -4,7 +4,6 @@ variable "authorizer_cognito_enabled" {
   default = false
   description = "Activate Cognito"
 }
-
 variable "region" {
   description = "AWS region"
   type        = string
@@ -25,6 +24,10 @@ variable "tags" {
 }
 variable "domain" {
   description = "Domain url of the website"
+}
+variable "service_account_ci_arn" {
+  description = "Service account arn for CI"
+  type = string
 }
 
 # Lambda Title
@@ -66,4 +69,15 @@ variable "gcp_client_secret" {
   type        = string
   sensitive   = true
   description = "The client secret for the GCP application"
+}
+# API GATEWAY
+variable "endpoint" {
+  type        = string
+  description = "The endpoint for the API Gateway"
+  default     = "api"
+}
+variable "stage" {
+  type        = string
+  description = "The stage for the API Gateway"
+  default     = "dev"
 }

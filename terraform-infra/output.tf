@@ -23,9 +23,9 @@ output "cognito_identity_pool_id" {
 }
 
 output "frontend_domain" {
-  value = module.frontend.frontend_domain
+  value = "https://${module.frontend.frontend_domain}"
 }
 
 output "aws_cognito_login_domain" {
-  value = module.cognito.aws_cognito_login_domain
+  value = "https://${module.cognito.aws_cognito_login_domain}.auth.${var.region}.amazoncognito.com"
 }
