@@ -1,3 +1,4 @@
+# TODO move to a separate file
 resource "aws_iam_role" "lambda_edge_exec" {
   assume_role_policy = <<EOF
 {
