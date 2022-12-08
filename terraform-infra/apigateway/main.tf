@@ -16,7 +16,7 @@ resource "aws_api_gateway_resource" "resource" {
 }
 
 module "authorizer" {
-  source = "./auth"
+  source                  = "./auth"
   cognito_user_pool_arn   = var.cognito_user_pool_arn
   project                 = var.project
   resource_id             = aws_api_gateway_resource.resource.id
@@ -33,21 +33,36 @@ resource "aws_api_gateway_integration" "add_title" {
   integration_http_method = "POST"
 }
 
-module "method" {
-  source                  = "./method"
-  project                 = var.project
-  resource_id             = aws_api_gateway_resource.resource.id
-  rest_api_id             = aws_api_gateway_rest_api.api.id
-  http_method             = "GET"
-  invoke_url              = var.invoke_url
-}
-
-resource "aws_lambda_permission" "apigw_lambda" {
+resource "aws_lambda_permission" "mehotd_post_permission" {
   statement_id            = "AllowExecutionFromAPIGateway"
   action                  = "lambda:InvokeFunction"
   function_name           = var.add_title_function_name
   principal               = "apigateway.amazonaws.com"
-  source_arn              = local.apigateway_invoke
+  source_arn              = local.post_apigateway_invoke
+}
+
+resource "aws_api_gateway_method" "method" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  resource_id   = aws_api_gateway_resource.resource.id
+  http_method   = "GET" # "POST/GET/PUT/DELETE/OPTIONS/PATCH"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "integration" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.resource.id
+  http_method             = aws_api_gateway_method.method.http_method
+  type                    = "AWS_PROXY"
+  uri                     = var.invoke_url
+  integration_http_method = "POST"
+}
+
+resource "aws_lambda_permission" "method_get_permission" {
+  statement_id            = "AllowExecutionFromAPIGatewayGET"
+  action                  = "lambda:InvokeFunction"
+  function_name           = var.add_title_function_name
+  principal               = "apigateway.amazonaws.com"
+  source_arn              = local.get_apigateway_invoke
 }
 
 resource "aws_api_gateway_deployment" "main" {
