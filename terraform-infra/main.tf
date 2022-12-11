@@ -18,6 +18,7 @@ module "lambda_filter" {
     src_path            = "../src/lambdas/filter"
     function_name       = "filter"
     project             = local.get_project
+    lambda_env          = var.lambda_env
     dymanodb_stream_arn = [module.dynamodb.dymanodb_stream_arn]
 }
 
