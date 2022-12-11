@@ -73,6 +73,9 @@ resource "aws_api_gateway_stage" "rest_api_stage" {
   deployment_id           = aws_api_gateway_deployment.main.id
   rest_api_id             = aws_api_gateway_rest_api.api.id
   stage_name              = var.stage
+  lifecycle {
+    ignore_changes = [deployment_id]
+  }
 }
 
 resource "aws_api_gateway_base_path_mapping" "path_mapping" {

@@ -50,6 +50,7 @@ exports.handler = (event, context, callback) => {
 			'*.cloudfront.net',
 			'*.google.com',
 			'*.amazonaws.com',
+			'https://cdnjs.cloudflare.com',
 		],
 		'media-src': [
 			"'self'",
@@ -81,6 +82,7 @@ exports.handler = (event, context, callback) => {
 			'*.cloudfront.net',
 			'*.google.com',
 			'*.amazonaws.com',
+			'https://cdnjs.cloudflare.com',
 		],
 		'prefetch-src': [
 			"'self'",
