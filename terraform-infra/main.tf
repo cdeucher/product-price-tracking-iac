@@ -20,6 +20,7 @@ module "lambda_filter" {
     project             = local.get_project
     lambda_env          = var.lambda_env
     dymanodb_stream_arn = [module.dynamodb.dymanodb_stream_arn]
+    dynamodb_arn        = [module.dynamodb.dymanodb_arn]
 }
 
 module "cognito" {

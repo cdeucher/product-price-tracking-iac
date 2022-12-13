@@ -46,7 +46,7 @@ variable "accountId" {
   type        = string
 }
 variable "dynamodb_attributes" {
-  type        = list(object({ name = string, type = string }))
+  type        = object({ sort_key = string, sort_type = string })
 }
 
 # COGNITO

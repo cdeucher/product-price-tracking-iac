@@ -25,6 +25,7 @@ resource "aws_lambda_function" "lambda" {
     handler          = "app.handle"
     source_code_hash = data.archive_file.code.output_base64sha256
     publish          = true
+    timeout          = 300
     dynamic "environment" {
         for_each = length(var.lambda_env) > 0 ? var.lambda_env : []
         content {
@@ -44,4 +45,5 @@ resource "aws_lambda_event_source_mapping" "allow_dynamodb_table_to_trigger_lamb
     function_name     = aws_lambda_function.lambda.arn
     starting_position = "LATEST"
     batch_size = 1
+    maximum_retry_attempts = 1
 }
