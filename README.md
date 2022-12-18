@@ -1,12 +1,14 @@
 ### The architecture of the project is as follows:
-...
+
+![Architecture](terraform-infra/img/architecture.png)
+
 
 ### About this repository:
 - IaC using Terraform.
-  - Check out the [terraform-infra](https://github.com/cdeucher/terraform-python-lambdas-api-gateway/terraform-infra/README.md) repository to see the code and requirements.
+  - Check out the [terraform-infra](https://github.com/cdeucher/product-price-tracking/tree/master/terraform-infra/README.md) folder to see the code and requirements.
 - AWS Lambdas to handle the backend logic.
   - Check out the [lambda-functions](https://github.com/cdeucher/python-api-lambdas) repository to see the code and requirements.
-- A Svelte frontend to interact with the backend.
+- Svelte frontend to interact with the backend.
   - Check out the [svelte-frontend](https://github.com/cdeucher/typescript-api-frontend) repository to see the code and requirements.
 
 ### How it works
