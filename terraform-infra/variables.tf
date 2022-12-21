@@ -71,7 +71,12 @@ variable "gcp_client_secret" {
   description = "The client secret for the GCP application"
 }
 # API GATEWAY
-variable "endpoint" {
+variable "endpoint_api" {
+  type        = string
+  description = "The endpoint for the API Gateway"
+  default     = "api"
+}
+variable "endpoint_sub" {
   type        = string
   description = "The endpoint for the API Gateway"
   default     = "api"

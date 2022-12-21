@@ -7,7 +7,7 @@ output "Endpoint" {
   value       = module.apigateway.invoke_url
 }
 output "rest_api_url" {
-  value = module.apigateway.rest_api_url
+  value = "${module.apigateway.rest_api_url}${module.resource_api.resource_path}"
 }
 
 output "cognito_client_id" {

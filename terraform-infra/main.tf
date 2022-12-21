@@ -23,6 +23,13 @@ module "lambda_filter" {
     dynamodb_arn        = [module.dynamodb.dymanodb_arn]
 }
 
+module "lambda_subscription" {
+    source              = "./lambda"
+    src_path            = "../src/lambdas/filter" # same as filter
+    function_name       = "subscription"
+    project             = local.get_project
+}
+
 module "cognito" {
     source = "./cognito"
     project                       = local.get_project
@@ -34,28 +41,10 @@ module "cognito" {
     domain                        = var.domain
 }
 
-module "apigateway" {
-    source = "./apigateway"
-
-    project                       = local.get_project
-    endpoint                      = var.endpoint
-    stage                         = var.stage
-    invoke_url                    = module.lambda_title.invoke_arn
-    add_title_function_name       = module.lambda_title.function_name
-    account_id                    = var.accountId
-    region                        = var.region
-    sub_domain                    = local.get_subdomain
-    domain                        = var.domain
-    tags                          = var.tags
-    cognito_user_pool_arn         = module.cognito.cognito_user_pool_arn
-    authorizer_cognito_enabled    = var.authorizer_cognito_enabled
-
-    depends_on = [
-      module.lambda_title,
-      module.lambda_filter,
-      module.dynamodb,
-      module.cognito
-    ]
+module "subscription" {
+    source          = "./sns"
+    project         = local.get_project
+    tags            = var.tags
 }
 
 module "frontend" {
@@ -68,10 +57,4 @@ module "frontend" {
     project    = local.get_project
     subdomain  = "dash"
     domain_name= local.domain_name
-}
-
-module "subscription" {
-    source          = "./sns"
-    project         = local.get_project
-    tags            = var.tags
 }

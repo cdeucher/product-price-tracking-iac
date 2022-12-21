@@ -18,7 +18,8 @@ project = "app"
 environment = "dev"
 
 # Api Gateway
-endpoint = "api2"
+endpoint_api = "api"
+endpoint_sub = "sub"
 stage = "dev"
 
 # Cognito

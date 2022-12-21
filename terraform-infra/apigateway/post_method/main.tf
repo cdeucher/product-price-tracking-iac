@@ -26,3 +26,20 @@ resource "aws_api_gateway_method" "method_authorizer" {
     "method.request.path.proxy" = true
   }
 }
+
+resource "aws_api_gateway_integration" "add_title" {
+  rest_api_id             = var.rest_api_id
+  resource_id             = var.resource_id
+  http_method             = local.http_method
+  uri                     = var.lambda_invoke_arn
+  type                    = "AWS_PROXY"
+  integration_http_method = "POST"
+}
+
+resource "aws_lambda_permission" "mehotd_post_permission" {
+  statement_id            = "AllowExecutionFromAPIGateway"
+  action                  = "lambda:InvokeFunction"
+  function_name           = var.function_name
+  principal               = "apigateway.amazonaws.com"
+  source_arn              = local.post_apigateway_invoke
+}
