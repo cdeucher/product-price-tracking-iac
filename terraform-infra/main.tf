@@ -69,3 +69,9 @@ module "frontend" {
     subdomain  = "dash"
     domain_name= local.domain_name
 }
+
+module "subscription" {
+    source          = "./sns"
+    project         = local.get_project
+    tags            = var.tags
+}

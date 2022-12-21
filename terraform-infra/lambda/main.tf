@@ -46,4 +46,12 @@ resource "aws_lambda_event_source_mapping" "allow_dynamodb_table_to_trigger_lamb
     starting_position = "LATEST"
     batch_size = 1
     maximum_retry_attempts = 1
+
+    filter_criteria {
+        filter {
+            pattern = jsonencode({
+                "eventName": [ "INSERT" ]
+            })
+        }
+    }
 }
