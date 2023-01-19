@@ -27,11 +27,14 @@ stage = "dev"
 # gcp_client_secret = ""
 
 # Lambda
-lambda_env = [{ TITLES_TABLE = "titles" }]
+lambda_env = { TITLES_TABLE = "titles" }
 
 # Dynamo
 tabe_name = "titles"
-dynamodb_attributes = { sort_key = "site", sort_type = "S" }
+dynamodb_attributes = {
+    sort_key = "site", sort_type = "S"
+    range_key = "id", range_type = "S"
+}
 
 cognito_user_pool_name = "login_pool"
 cognito_user_pool_client_name = "api-gateway-pool"

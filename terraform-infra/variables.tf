@@ -33,7 +33,7 @@ variable "service_account_ci_arn" {
 # Lambda Title
 variable "lambda_env" {
     description = "Lambda environment"
-    type = list(map(string))
+    type = map(string)
 }
 
 # DYNAMODB
@@ -46,7 +46,10 @@ variable "accountId" {
   type        = string
 }
 variable "dynamodb_attributes" {
-  type        = object({ sort_key = string, sort_type = string })
+  type        = object({
+    sort_key = string, sort_type = string
+    range_key = string, range_type = string
+  })
 }
 
 # COGNITO

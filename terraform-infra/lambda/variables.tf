@@ -8,6 +8,16 @@ variable "dymanodb_stream_arn" {
     description = "The ARN of the dynamodb stream resource"
     default     = []
 }
+variable "lambda_arn" {
+    type        = list(string)
+    description = "The ARN of the lambda resource"
+    default     = []
+}
+variable "external_policies_arn" {
+    type        = list(string)
+    description = "The ARN of the external policies"
+    default     = []
+}
 variable "src_path" {
     description = "Path to the source code"
     type        = string
@@ -24,4 +34,9 @@ variable "lambda_env" {
 variable "project" {
     type = string
     description = "The name of the project"
+}
+variable "retry_attempts" {
+    type = number
+    description = "The number of times to retry when the function returns an error"
+    default = 1
 }

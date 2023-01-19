@@ -13,6 +13,7 @@ module "apigateway" {
   ]
 }
 
+# /api
 module "resource_api" {
   source = "./apigateway/resource"
   endpoint         = var.endpoint_api
@@ -20,6 +21,7 @@ module "resource_api" {
   root_resource_id = module.apigateway.root_resource_id
 }
 
+# POST /api
 module "post_method" {
   source                  = "./apigateway/post_method"
   rest_api_id             = module.apigateway.rest_api_id
@@ -34,6 +36,7 @@ module "post_method" {
   region                  = var.region
 }
 
+# GET /api
 module "get_method" {
   source = "./apigateway/get_method"
   rest_api_id             = module.apigateway.rest_api_id
@@ -41,6 +44,31 @@ module "get_method" {
   resource_path           = module.resource_api.resource_path
   invoke_url              = module.lambda_title.invoke_arn
   function_name           = module.lambda_title.function_name
+  account_id              = var.accountId
+  region                  = var.region
+}
+
+# /api/sub
+module "resource_subscription" {
+  source = "./apigateway/resource"
+  endpoint         = var.endpoint_sub
+  rest_api_id      = module.apigateway.rest_api_id
+  root_resource_id = module.resource_api.resource_id
+}
+
+# POST /api/sub
+module "get_sub_method" {
+  source = "./apigateway/post_method"
+  rest_api_id             = module.apigateway.rest_api_id
+  resource_id             = module.resource_subscription.resource_id
+  resource_path           = module.resource_subscription.resource_path
+  function_name           = module.lambda_subscription.function_name
+
+  cognito_user_pool_arn   = module.cognito.cognito_user_pool_arn
+  project                 = "${var.project}-subscription"
+  authorizer_cognito_enabled = var.authorizer_cognito_enabled
+  lambda_invoke_arn       = module.lambda_subscription.invoke_arn
+
   account_id              = var.accountId
   region                  = var.region
 }

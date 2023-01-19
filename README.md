@@ -37,7 +37,7 @@
 - `done` - Enable CORs in the API Gateway.
 - `done` - Lambda function should use layers to reduce the size of the deployment package.
 - `done` - Lambda function should use DynamoDB stream to scrape the website and update the result in the DynamoDB table.
-- User subscribe a product to be monitored.
+- `done` - User subscribe a product to be monitored.
 - User will receive an email when the product price drops below the target.
 - User can unsubscribe a product.
 - Lambda function cron job to scrape the website and update the result in the DynamoDB table.

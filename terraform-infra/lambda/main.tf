@@ -45,8 +45,9 @@ resource "aws_lambda_event_source_mapping" "allow_dynamodb_table_to_trigger_lamb
     function_name     = aws_lambda_function.lambda.arn
     starting_position = "LATEST"
     batch_size = 1
-    maximum_retry_attempts = 1
+    maximum_retry_attempts = var.retry_attempts
 
+    # @TODO: Add support for filter parameters
     filter_criteria {
         filter {
             pattern = jsonencode({
