@@ -41,7 +41,7 @@
 - User will receive an email when the product price drops below the target.
 - User can unsubscribe a product.
 - Lambda function cron job to scrape the website and update the result in the DynamoDB table.
-- Lambda function should use DynamoDB stream to send an email notification to all subscribers when the price drops below the target price.
+- Lambda function should use SQS stream to send an email notification to all subscribers when the price drops below the target price.
 
 
 ### Testing the API with Cognito

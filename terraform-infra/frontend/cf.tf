@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
-  aliases = [ local.get_domain ]
+  aliases = [local.get_domain]
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
     lambda_function_association {
       event_type = "origin-response"
       lambda_arn = aws_lambda_function.lambda_edge_origin_response.qualified_arn
-    }   
+    }
   }
 
   ordered_cache_behavior {
@@ -78,7 +78,7 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
     lambda_function_association {
       event_type = "origin-response"
       lambda_arn = aws_lambda_function.lambda_edge_origin_response.qualified_arn
-    }    
+    }
   }
 
   price_class = "PriceClass_All"
@@ -109,5 +109,5 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
     ssl_support_method       = "sni-only"
   }
 
-  tags = merge({ Name  = "devops-app-${var.env_name}"}, var.tags)
+  tags = merge({ Name = "devops-app-${var.env_name}" }, var.tags)
 }

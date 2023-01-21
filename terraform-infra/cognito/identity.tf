@@ -1,7 +1,7 @@
 resource "aws_cognito_user_pool_client" "user_pool_client" {
-  name                = var.cognito_user_pool_client_name
-  user_pool_id        = aws_cognito_user_pool.user_pool.id
-  explicit_auth_flows = ["ALLOW_USER_PASSWORD_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
+  name                                 = var.cognito_user_pool_client_name
+  user_pool_id                         = aws_cognito_user_pool.user_pool.id
+  explicit_auth_flows                  = ["ALLOW_USER_PASSWORD_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
   callback_urls                        = [var.domain_callback_url]
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["implicit"]
@@ -32,7 +32,7 @@ resource "aws_cognito_identity_pool" "main" {
   allow_unauthenticated_identities = false
 
   supported_login_providers = {
-    "accounts.google.com"   = var.gcp_client_id
+    "accounts.google.com" = var.gcp_client_id
   }
 }
 
@@ -45,7 +45,7 @@ resource "aws_cognito_identity_pool_roles_attachment" "main" {
 }
 # TODO: move roles to IAM file and JSON policy
 resource "aws_iam_role" "auth_iam_role" {
-  name = "${var.project}-auth-iam-role"
+  name               = "${var.project}-auth-iam-role"
   assume_role_policy = <<EOF
  {
     "Version": "2012-10-17",
@@ -71,7 +71,7 @@ resource "aws_iam_role" "auth_iam_role" {
 }
 
 resource "aws_iam_role" "unauth_iam_role" {
-  name = "${var.project}-unauth-iam-role"
+  name               = "${var.project}-unauth-iam-role"
   assume_role_policy = <<EOF
  {
       "Version": "2012-10-17",
@@ -93,13 +93,13 @@ resource "aws_iam_role_policy" "web_iam_unauth_role_policy" {
   name = "${var.project}-web-iam-unauth-role-policy"
   role = aws_iam_role.unauth_iam_role.id
   policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          Action = ["*"]
-          Effect   = "Deny"
-          Resource = "*"
-        },
-      ]
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = ["*"]
+        Effect   = "Deny"
+        Resource = "*"
+      },
+    ]
   })
 }

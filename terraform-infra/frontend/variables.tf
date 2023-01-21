@@ -1,5 +1,5 @@
 variable "aws_region" {
-  type = string
+  type        = string
   description = "AWS region"
 }
 
@@ -8,7 +8,7 @@ variable "aws_region_availability_zone" {
 }
 
 variable "project" {
-  type = string
+  type        = string
   description = "Project name"
 }
 
@@ -17,8 +17,8 @@ variable "env_name" {
 }
 
 variable "tags" {
-    type = map(string)
-    description = "Tags para serem aplicadas em todos os recursos"
+  type        = map(string)
+  description = "Tags para serem aplicadas em todos os recursos"
 }
 
 variable "src_path" {
@@ -27,16 +27,16 @@ variable "src_path" {
 }
 
 variable "subdomain" {
-    type        = string
-    description = "URL to the Apliaction"
+  type        = string
+  description = "URL to the Apliaction"
 }
 
 variable "domain_name" {
-    type        = string
-    description = "Domain name"
+  type        = string
+  description = "Domain name"
 }
 
 variable "service_account_ci_arn" {
-    type = string
-    description = "ARN of the service account used by CI"
+  type        = string
+  description = "ARN of the service account used by CI"
 }

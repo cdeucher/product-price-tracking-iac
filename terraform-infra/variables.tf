@@ -1,7 +1,7 @@
 # Settings
 variable "authorizer_cognito_enabled" {
-  type = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Activate Cognito"
 }
 variable "region" {
@@ -9,17 +9,17 @@ variable "region" {
   type        = string
 }
 variable "environment" {
-  default = "dev"
-  type = string
+  default     = "dev"
+  type        = string
   description = "Environment name"
 }
 variable "project" {
-  default = "myapp"
-  type = string
+  default     = "myapp"
+  type        = string
   description = "Project name"
 }
 variable "tags" {
-  type = map(string)
+  type        = map(string)
   description = "Tags to apply to all resources"
 }
 variable "domain" {
@@ -27,13 +27,13 @@ variable "domain" {
 }
 variable "service_account_ci_arn" {
   description = "Service account arn for CI"
-  type = string
+  type        = string
 }
 
 # Lambda Title
 variable "lambda_env" {
-    description = "Lambda environment"
-    type = map(string)
+  description = "Lambda environment"
+  type        = map(string)
 }
 
 # DYNAMODB
@@ -46,8 +46,8 @@ variable "accountId" {
   type        = string
 }
 variable "dynamodb_attributes" {
-  type        = object({
-    sort_key = string, sort_type = string
+  type = object({
+    sort_key  = string, sort_type = string
     range_key = string, range_type = string
   })
 }

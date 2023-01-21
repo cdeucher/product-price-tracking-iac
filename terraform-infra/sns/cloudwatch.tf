@@ -3,5 +3,5 @@ resource "aws_cloudwatch_log_group" "log_group" {
   retention_in_days = 7
   tags = merge({
     Name = "/aws/sns/${local.get_name}"
-  },var.tags)
+  }, var.tags)
 }

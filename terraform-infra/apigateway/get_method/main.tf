@@ -16,9 +16,9 @@ resource "aws_api_gateway_integration" "integration" {
 }
 
 resource "aws_lambda_permission" "method_get_permission" {
-  statement_id            = "AllowExecutionFromAPIGatewayGET"
-  action                  = "lambda:InvokeFunction"
-  function_name           = var.function_name
-  principal               = "apigateway.amazonaws.com"
-  source_arn              = local.get_apigateway_invoke
+  statement_id  = "AllowExecutionFromAPIGatewayGET"
+  action        = "lambda:InvokeFunction"
+  function_name = var.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = local.get_apigateway_invoke
 }

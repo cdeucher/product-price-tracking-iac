@@ -43,15 +43,15 @@ jobs:
         run: cd terraform-infra && terraform init -backend-config="backend.hcl"
 
       - name: Terraform workspace
-        run: cd terraform-infra && terraform workspace select dev
+        run: cd terraform-infra && terraform workspace select prd
 
-      - name: Terraform Apply
-        id: apply
-        run: |
-          cd terraform-infra && terraform apply \
-              --var-file=environments/dev.tfvars \
-              -var="gcp_client_id=${{ secrets.GCP_CLIENT_ID }}" \
-              -var="gcp_client_secret=${{ secrets.GCP_SECRET }}" \
-              -var="service_account_ci_arn=${{ secrets.SERVICE_ACCOUNT_CI_ARN }}" \
-              -var="accountId=${{ secrets.ACCOUNT_ID }}" \
-              -var="domain=${{ secrets.DOMAIN }}" -auto-approve
+      #- name: Terraform Apply
+      #  id: apply
+      #  run: |
+      #    cd terraform-infra && terraform apply \
+      #        --var-file=environments/dev.tfvars \
+      #        -var="gcp_client_id=${{ secrets.GCP_CLIENT_ID }}" \
+      #        -var="gcp_client_secret=${{ secrets.GCP_SECRET }}" \
+      #        -var="service_account_ci_arn=${{ secrets.SERVICE_ACCOUNT_CI_ARN }}" \
+      #        -var="accountId=${{ secrets.ACCOUNT_ID }}" \
+      #        -var="domain=${{ secrets.DOMAIN }}" -auto-approve

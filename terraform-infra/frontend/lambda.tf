@@ -33,5 +33,5 @@ resource "aws_lambda_function" "lambda_edge_origin_response" {
 
   runtime = "nodejs14.x"
 
-  tags = merge({ Name  = "devops_app-${var.env_name}" }, var.tags)
+  tags = merge({ Name = "devops_app-${var.env_name}" }, var.tags)
 }

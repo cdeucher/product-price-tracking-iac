@@ -2,12 +2,16 @@ variable "project" {
   type        = string
   description = "The name of the environment to create"
 }
+variable "queue_name" {
+  type        = string
+  description = "The name of the queue to create"
+}
 variable "tags" {
   type        = map(string)
   description = "The tags to apply to the resources"
 }
-variable "lambdas" {
-  type        = list(object({ lambda_arn = string, function_name = string, invoke_arn = string }))
-  description = "Lambda Object"
+variable "lambda_arns" {
+  type        = list(string)
+  description = "Lambda arns to attach to the queue"
   default     = []
 }

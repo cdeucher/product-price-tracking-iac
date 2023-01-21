@@ -3,24 +3,24 @@ authorizer_cognito_enabled = true
 # service_account_ci_arn = "arn:aws:iam::xx:user/xx"
 
 # General
-region    = "us-east-1"
+region = "us-east-1"
 # accountId = "xx"
 # domain    = "xx"
 tags = {
-    Name             = "app"
-    Environment      = "dev"
-    Owner            = "me"
-    Application      = "app"
-    Environment_Type = "dev"
-    Environment_Name = "dev"
+  Name             = "app"
+  Environment      = "dev"
+  Owner            = "me"
+  Application      = "app"
+  Environment_Type = "dev"
+  Environment_Name = "dev"
 }
-project = "app"
+project     = "app"
 environment = "dev"
 
 # Api Gateway
 endpoint_api = "api"
 endpoint_sub = "sub"
-stage = "dev"
+stage        = "dev"
 
 # Cognito
 # gcp_client_id = ""
@@ -32,9 +32,9 @@ lambda_env = { TITLES_TABLE = "titles" }
 # Dynamo
 tabe_name = "titles"
 dynamodb_attributes = {
-    sort_key = "site", sort_type = "S"
-    range_key = "id", range_type = "S"
+  sort_key  = "site", sort_type = "S"
+  range_key = "id", range_type = "S"
 }
 
-cognito_user_pool_name = "login_pool"
+cognito_user_pool_name        = "login_pool"
 cognito_user_pool_client_name = "api-gateway-pool"
