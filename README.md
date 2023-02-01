@@ -38,11 +38,14 @@
 - `done` - Lambda function should use layers to reduce the size of the deployment package.
 - `done` - Lambda function should use DynamoDB stream to scrape the website and update the result in the DynamoDB table.
 - `done` - User subscribe a product to be monitored.
-- User will receive an email when the product price drops below the target.
+- `done` - User will receive an email when the product price drops below the target.
+- `done` - Lambda function cron job to scrape the website and update the result in the DynamoDB table.
+- `done` - Lambda function should use SQS stream to send an email notification to all subscribers when the price drops below the target price.
 - User can unsubscribe a product.
-- Lambda function cron job to scrape the website and update the result in the DynamoDB table.
-- Lambda function should use SQS stream to send an email notification to all subscribers when the price drops below the target price.
-
+- Lambda function should scrape to get current price
+- Notification mail template
+- Fix home page subscription notification
+- Fix home page list
 
 ### Testing the API with Cognito
 - Check out the [README-TEST.md](README-TEST.md) file to see how to test the API with Cognito.
