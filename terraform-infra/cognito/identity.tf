@@ -6,7 +6,7 @@ resource "aws_cognito_user_pool_client" "user_pool_client" {
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["implicit"]
   allowed_oauth_scopes                 = ["email", "openid", "phone"]
-  supported_identity_providers         = ["COGNITO", "Google"]
+  supported_identity_providers         = ["Google"] #["COGNITO", "Google"]
 
 }
 
