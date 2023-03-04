@@ -1,3 +1,2 @@
-pyjwt
-
-
+requests
+BeautifulSoup4
