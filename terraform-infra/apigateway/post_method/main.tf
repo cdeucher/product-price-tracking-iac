@@ -27,7 +27,7 @@ resource "aws_api_gateway_method" "method_authorizer" {
   }
 }
 
-resource "aws_api_gateway_integration" "add_title" {
+resource "aws_api_gateway_integration" "integration" {
   rest_api_id             = var.rest_api_id
   resource_id             = var.resource_id
   http_method             = local.http_method
@@ -36,8 +36,8 @@ resource "aws_api_gateway_integration" "add_title" {
   integration_http_method = "POST"
 }
 
-resource "aws_lambda_permission" "mehotd_post_permission" {
-  statement_id  = "AllowExecutionFromAPIGateway"
+resource "aws_lambda_permission" "method_post_permission" {
+  statement_id  = "${var.method_name}-AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = var.function_name
   principal     = "apigateway.amazonaws.com"

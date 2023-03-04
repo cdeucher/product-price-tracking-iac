@@ -22,7 +22,7 @@ resource "aws_lambda_function" "lambda" {
   runtime          = "python3.8"
   filename         = data.archive_file.code.output_path
   layers           = [aws_lambda_layer_version.this.arn]
-  handler          = "app.handle"
+  handler          = "app.handler"
   source_code_hash = data.archive_file.code.output_base64sha256
   publish          = true
   timeout          = 300

@@ -1,3 +1,8 @@
+variable "method_name" {
+  type        = string
+  description = "The name of the method"
+  default     = "/post"
+}
 variable "cognito_user_pool_arn" {
   type        = string
   description = "The ARN of the Cognito User Pool"
