@@ -7,7 +7,6 @@ module "apigateway" {
   tags       = var.tags
   depends_on = [
     module.lambda_handler,
-    module.lambda_filter,
     module.dynamodb,
     module.cognito
   ]
