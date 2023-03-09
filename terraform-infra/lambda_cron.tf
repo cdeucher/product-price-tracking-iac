@@ -15,7 +15,7 @@ module "lambda_cron" {
   retry_attempts = 3
   dynamodb_arn   = [module.dynamodb.dynamodb_arn]
   sqs_arn        = [module.queue.queue_arn]
-  lambda_env     = [merge(var.lambda_env, {
+  lambda_env     = [merge(local.get_lambda_env, {
       "QUEUE_NAME" = module.queue.queue_name,
       "QUEUE_URL"  = module.queue.queue_url
   })]

@@ -46,12 +46,14 @@ variable "accountId" {
   type        = string
 }
 variable "dynamodb_attributes" {
-  type = object({
-    sort_key  = string, sort_type = string
-    range_key = string, range_type = string
-  })
+  type = list(map(string))
 }
-
+variable "dynamodb_hash_key" {
+  type = string
+}
+variable "dynamodb_range_key" {
+  type = string
+}
 # COGNITO
 variable "cognito_user_pool_name" {
   type        = string

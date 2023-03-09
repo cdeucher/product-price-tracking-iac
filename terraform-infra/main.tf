@@ -2,6 +2,8 @@ module "dynamodb" {
   source     = "./dynamodb"
   table_name = var.tabe_name
   attributes = var.dynamodb_attributes
+  dynamodb_hash_key = var.dynamodb_hash_key
+  dynamodb_range_key = var.dynamodb_range_key
 }
 
 module "cognito" {

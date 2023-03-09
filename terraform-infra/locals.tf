@@ -6,4 +6,5 @@ locals {
   }, var.environment, "api.${local.domain_name}")
   get_project       = "${var.project}-${var.environment}"
   auth_callback_url = "https://dash.${local.domain_name}"
+  get_lambda_env = merge(var.lambda_env,{TITLES_TABLE = var.tabe_name})
 }

@@ -26,6 +26,7 @@ resource "aws_lambda_function" "lambda" {
   source_code_hash = data.archive_file.code.output_base64sha256
   publish          = true
   timeout          = 300
+  memory_size      = 256
   dynamic "environment" {
     for_each = length(var.lambda_env) > 0 ? var.lambda_env : []
     content {
