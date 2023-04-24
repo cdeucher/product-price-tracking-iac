@@ -23,6 +23,16 @@ variable "lambda_arn" {
   description = "The ARN of the lambda resource"
   default     = []
 }
+variable "image_uri" {
+  type        = list(string)
+  description = "The URI of the image"
+  default     = []
+}
+variable "repository_arn" {
+  type        = list(string)
+  description = "The ARN of the repository"
+  default     = []
+}
 variable "external_policies_arn" {
   type        = list(string)
   description = "The ARN of the external policies"

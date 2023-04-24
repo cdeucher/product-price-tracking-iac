@@ -76,3 +76,19 @@ resource "aws_iam_role_policy_attachment" "sqs_access" {
   role       = aws_iam_role.role_for_lambda.name
   policy_arn = aws_iam_policy.sqs_access[0].arn
 }
+
+#  TODO: remove permissive access to ECR
+resource "aws_iam_policy" "ecr_access" {
+  count       = length(var.repository_arn) > 0 ? 1 : 0
+  name        = "${var.project}-${var.function_name}-ecr-access"
+  description = "IAM policy for ECR"
+
+  policy = templatefile("${path.module}/policies/ecr_policy.json", {
+    arns = var.repository_arn
+  })
+}
+resource "aws_iam_role_policy_attachment" "ecr_access" {
+  count       = length(var.repository_arn) > 0 ? 1 : 0
+  role       = aws_iam_role.role_for_lambda.name
+  policy_arn = aws_iam_policy.ecr_access[0].arn
+}
