@@ -26,6 +26,10 @@ output "frontend_domain" {
   value = "https://${module.frontend.frontend_domain}"
 }
 
+output "repository_url" {
+  value = aws_ecr_repository.scraping.repository_url
+}
+
 output "aws_cognito_login_domain" {
   value = "https://${module.cognito.aws_cognito_login_domain}.auth.${var.region}.amazoncognito.com"
 }

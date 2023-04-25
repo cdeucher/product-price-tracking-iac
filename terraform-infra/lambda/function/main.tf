@@ -3,9 +3,9 @@ resource "aws_lambda_function" "code" {
   function_name    = "${var.project}-${var.function_name}"
   role             = var.role_arn
   runtime          = "python3.8"
-  filename         = var.output_path
   layers           = [var.layer_arn]
   handler          = "app.handler"
+  filename         = var.output_path
   source_code_hash = var.output_base64sha256
   publish          = true
   timeout          = 300
@@ -27,9 +27,9 @@ resource "aws_lambda_function" "uri" {
   function_name    = "${var.project}-${var.function_name}"
   role             = var.role_arn
   runtime          = "python3.8"
-  layers           = [var.layer_arn]
   handler          = "app.handler"
   image_uri        = "${var.image_uri[count.index]}:latest"
+  package_type     = "Image"
   publish          = true
   timeout          = 300
   memory_size      = 256
