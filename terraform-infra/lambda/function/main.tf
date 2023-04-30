@@ -32,7 +32,7 @@ resource "aws_lambda_function" "uri" {
   package_type     = "Image"
   publish          = true
   timeout          = 300
-  memory_size      = 256
+  memory_size      = 1024
   dynamic "environment" {
     for_each = length(var.lambda_env) > 0 ? var.lambda_env : []
     content {
