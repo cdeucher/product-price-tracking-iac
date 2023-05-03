@@ -30,9 +30,9 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
     cached_methods         = ["GET", "HEAD"]
     target_origin_id       = local.s3_origin_id
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    min_ttl                = 86400
+    default_ttl            = 86400
+    max_ttl                = 31536000
     compress               = true
 
     forwarded_values {
@@ -58,7 +58,7 @@ resource "aws_cloudfront_distribution" "devops_app_cf_distribution" {
     compress               = true
     default_ttl            = 86400
     max_ttl                = 31536000
-    min_ttl                = 0
+    min_ttl                = 86400
     path_pattern           = "/*"
     smooth_streaming       = false
     target_origin_id       = local.s3_origin_id
