@@ -29,3 +29,7 @@ output "frontend_domain" {
 output "aws_cognito_login_domain" {
   value = "https://${module.cognito.aws_cognito_login_domain}.auth.${var.region}.amazoncognito.com"
 }
+
+output "grafana_role_arn" {
+  value = module.grafana.role_arn
+}

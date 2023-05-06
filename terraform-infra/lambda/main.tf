@@ -21,9 +21,9 @@ resource "aws_lambda_function" "lambda" {
   role             = aws_iam_role.role_for_lambda.arn
   runtime          = "python3.8"
   filename         = data.archive_file.code.output_path
+  source_code_hash = data.archive_file.code.output_base64sha256
   layers           = [aws_lambda_layer_version.this.arn]
   handler          = "app.handler"
-  source_code_hash = data.archive_file.code.output_base64sha256
   publish          = true
   timeout          = 300
   memory_size      = 256

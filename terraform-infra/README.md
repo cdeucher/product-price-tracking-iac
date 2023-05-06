@@ -33,6 +33,9 @@ Customize the Terraform code to your needs in the `/environments/` directory:
   service_account_ci_arn = "service account arn, could be found in the AWS IAM"
   accountId = "accountId from AWS IAM, ex. (123498234)"
   domain = "domain name of the hosted zone, ex. (example.com)"
+  # Grafana : https://grafana.com/docs/grafana-cloud/data-configuration/integrations/integration-reference/integration-cloudwatch/
+  grafana_account_id = "xxxx"
+  external_id       = "xxxx"
 ```
 
 ```bash
@@ -44,6 +47,9 @@ $ terraform apply --var-file=environments/dev.tfvars \
   -var="gcp_client_secret=${GCP_CLIENT_SECRET}" \
   -var="service_account_ci_arn=${SERVICE_ACCOUNT_CI_ARN}" \
   -var="accountId=${ACCOUNT_ID}" \
-  -var="domain=${DOMAIN}" -out plan.tfplan
+  -var="grafana_account_id=${GRAFANA_ACCOUNT_ID}" \
+  -var="grafana_external_id=${GRAFANA_EXTERNAL_ID}" \
+  -var="domain=${DOMAIN}" \
+  -out plan.tfplan
 $ terraform apply plan.tfplan
 ```

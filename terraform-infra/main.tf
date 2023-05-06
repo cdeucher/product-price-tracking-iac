@@ -28,3 +28,10 @@ module "frontend" {
   subdomain              = "dash"
   domain_name            = local.domain_name
 }
+
+module "grafana" {
+  source = "./grafana"
+  project = local.get_project
+  external_id = var.grafana_external_id
+  grafana_account_id = var.grafana_account_id
+}

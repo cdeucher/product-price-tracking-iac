@@ -91,3 +91,14 @@ variable "stage" {
   description = "The stage for the API Gateway"
   default     = "dev"
 }
+# Grafana
+variable "grafana_external_id" {
+  type = string
+  description = "External ID for Grafana"
+  default = "11112222"
+}
+variable "grafana_account_id" {
+  type = string
+  description = "Grafana account ID"
+  default = "11112222"
+}

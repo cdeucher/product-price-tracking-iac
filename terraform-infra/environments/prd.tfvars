@@ -40,3 +40,7 @@ dynamodb_attributes = [
 
 cognito_user_pool_name        = "login_pool"
 cognito_user_pool_client_name = "api-gateway-pool"
+
+# Grafana
+# grafana_account_id = ""
+# grafana_external_id = ""
